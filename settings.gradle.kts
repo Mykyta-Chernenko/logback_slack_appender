@@ -1,0 +1,1 @@
+rootProject.name = "logback_slack_appender"

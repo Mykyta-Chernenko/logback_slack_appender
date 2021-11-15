@@ -1,0 +1,21 @@
+.gradletasknamecache
+.gradle/
+
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# testing
+coverage/
+
+# production
+build/
+lib/
+out/
+
+# misc
+.DS_Store
+*.env
+*.envrc
+
