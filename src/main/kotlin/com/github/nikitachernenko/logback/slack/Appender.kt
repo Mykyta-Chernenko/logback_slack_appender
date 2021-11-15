@@ -3,12 +3,13 @@ package com.github.nikitachernenko.logback.slack
 import ch.qos.logback.classic.Level
 import ch.qos.logback.classic.spi.ILoggingEvent
 import ch.qos.logback.core.AsyncAppenderBase
+import ch.qos.logback.core.UnsynchronizedAppenderBase
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 
 class Appender(protected val postSlackMessage: PostSlackMessageFn = ::postSlackMessage) :
-    AsyncAppenderBase<ILoggingEvent?>() {
+    UnsynchronizedAppenderBase<ILoggingEvent?>() {
     private val logger: Logger = LoggerFactory.getLogger(Appender::class.java)
 
     lateinit var webhookUri: String
@@ -21,7 +22,7 @@ class Appender(protected val postSlackMessage: PostSlackMessageFn = ::postSlackM
     var errorColor = "#FF0000"
     var defaultColor = "#F8F8FF"
 
-    override fun doAppend(eventObject: ILoggingEvent?) {
+    override fun append(eventObject: ILoggingEvent?) {
         try {
             eventObject?.let { processMessage(it.formattedMessage, it.argumentArray, it.level) }
         } catch (ex: Exception) {
