@@ -2,8 +2,8 @@ package com.github.nikitachernenko.logback.slack
 
 import ch.qos.logback.classic.Level
 import ch.qos.logback.classic.spi.ILoggingEvent
-import ch.qos.logback.core.AsyncAppenderBase
 import ch.qos.logback.core.UnsynchronizedAppenderBase
+import ch.qos.logback.core.status.ErrorStatus
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -26,7 +26,7 @@ class Appender(protected val postSlackMessage: PostSlackMessageFn = ::postSlackM
         try {
             eventObject?.let { processMessage(it.formattedMessage, it.argumentArray, it.level) }
         } catch (ex: Exception) {
-            logger.error("Error posting log to Slack.com ($channel): $eventObject", ex)
+            addStatus(ErrorStatus("Error in SlackAppender", this, ex))
         }
     }
 

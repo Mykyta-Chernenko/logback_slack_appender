@@ -3,16 +3,35 @@ val kotlinVersion = "1.5.31"
 plugins {
     kotlin("jvm") version "1.5.31"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.5.31"
+    `maven-publish`
 }
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions.jvmTarget = "11"
 }
 
 group = "com.github.nikitachernenko"
-version = "1.0.0"
+version = "1.0.2"
 
 repositories {
     mavenCentral()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("lib") {
+            from(components["java"])
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/nikita-chernenko/logback_slack_appender")
+            credentials {
+                username = (findProperty("githubUsername") ?: System.getenv("USERNAME"))?.toString()
+                password = (findProperty("githubToken") ?: System.getenv("TOKEN"))?.toString()
+            }
+        }
+    }
 }
 
 dependencies {

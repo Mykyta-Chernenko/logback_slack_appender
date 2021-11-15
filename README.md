@@ -6,6 +6,14 @@ Integration between [Logback](http://logback.qos.ch/) appender that can push a m
 
 Add dependency to `com.github.nikitachernenko:logback-slack-appender:1.0.0`
 
+add repository to this github package, example using gradle kotlin dsl
+```kotlin
+repositories {
+    addRepository("logbackSlackAppender", "https://maven.pkg.github.com/nikita-chernenko/logack_slack_appender")
+}
+```
+
+
 Change configuration to our logback settings
 Example of Appender configuration to logback.xml. Filtering by "slack" marker
 ```
