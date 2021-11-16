@@ -8,7 +8,7 @@ import org.slf4j.MarkerFactory
 
 val slackMarker: Marker = MarkerFactory.getMarker("slack")
 
-class SlackFilter : Filter<ILoggingEvent?>() {
+class Filter : Filter<ILoggingEvent?>() {
     var marker: String = slackMarker.name
     override fun decide(eventObject: ILoggingEvent?): FilterReply {
         return if (eventObject?.marker?.name == marker) {

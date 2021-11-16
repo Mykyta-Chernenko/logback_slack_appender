@@ -24,7 +24,7 @@ tasks {
 }
 
 group = "com.github.nikitachernenko"
-version = "1.0.8"
+version = "1.0.9"
 
 repositories {
     mavenCentral()
