@@ -1,16 +1,30 @@
-val kotlinVersion = "1.5.31"
+val kotlinVersion = "1.4.30"
 
 plugins {
-    kotlin("jvm") version "1.5.31"
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.5.31"
+    kotlin("jvm") version "1.4.30"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.4.30"
     `maven-publish`
 }
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
+
+java {
+    sourceCompatibility = JavaVersion.toVersion("11")
+}
+
+tasks {
+    compileKotlin {
+        kotlinOptions {
+            jvmTarget = "11"
+        }
+    }
+    compileTestKotlin {
+        kotlinOptions {
+            jvmTarget = "11"
+        }
+    }
 }
 
 group = "com.github.nikitachernenko"
-version = "1.0.2"
+version = "1.0.6"
 
 repositories {
     mavenCentral()
