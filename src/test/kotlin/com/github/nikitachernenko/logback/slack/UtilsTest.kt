@@ -1,5 +1,6 @@
 package com.github.nikitachernenko.logback.slack
 
+import java.time.Instant
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import org.junit.jupiter.api.Test
@@ -14,6 +15,13 @@ class UtilsTest {
         assertEquals(mapOf(), makePayload())
         assertEquals(mapOf("key" to "value"), makePayload(mapOf("key" to "value"), mapOf("key" to "value")))
     }
+
+    @Test
+    fun `test makePayload Instant`() {
+        val now = Instant.now()
+        assertEquals(now.toEpochMilli().toString().take(10), makePayload(mapOf("key" to now))["key"]?.take(10))
+    }
+
 
     @Test
     fun `test makeParams`() {

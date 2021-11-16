@@ -24,7 +24,7 @@ tasks {
 }
 
 group = "com.github.nikitachernenko"
-version = "1.0.6"
+version = "1.0.8"
 
 repositories {
     mavenCentral()
@@ -55,8 +55,15 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.9.2")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0")
+    // Instant serialization support
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.0")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.0.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.0.1")
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
